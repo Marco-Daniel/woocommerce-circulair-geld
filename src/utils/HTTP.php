@@ -104,7 +104,7 @@ class HTTP {
           // succes
           return $json->ticketNumber;
           default:
-          // handle error
+          return 'Error: Er is een onbekende foutcode: ' . $response_code;
           break;
       }
     }
