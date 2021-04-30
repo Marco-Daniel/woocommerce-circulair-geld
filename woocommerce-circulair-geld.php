@@ -6,7 +6,7 @@
  * Description: Een WordPress plugin die Circulair Geld betlaingen mogelijk maakt voor WooCommerce.
  * Author: M.D. Leguijt | M.D. Design & Development
  * Author URI: https://mddd.nl
- * Version: 1.0.1
+ * Version: 1.0.4
  */
 
 if (!defined('ABSPATH')) {
