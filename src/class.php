@@ -6,6 +6,7 @@ use MDDD\UI;
 // include helper functions
 require_once(dirname(__FILE__) . '/utils/HTTP.php');
 require_once(dirname(__FILE__) . '/utils/UI.php');
+require_once(dirname(__FILE__) . '/utils/helper.php');
 
 function wooce_payment_gateway_init() {
   class WC_Gateway_CG extends WC_Payment_Gateway {
@@ -67,19 +68,20 @@ function wooce_payment_gateway_init() {
 
     // Generate appropriate headers to make requests
     private function headers() {
-      if ($this->use_accessclient) {
-        return array(
-          'Content-Transfer-Encoding' 	=> 'application/json',
-          'Content-type' 								=> 'application/json;charset=utf-8',
-          'Access-Client-Token' 				=> $this->accessclient
-        ); 
+      $headers = array(
+        'Content-Transfer-Encoding' 	=> 'application/json',
+        'Content-type' 								=> 'application/json;charset=utf-8',
+      ); 
+
+      if ($this->use_accessclient || !$this->testmode) {
+        $headers['Access-Client-Token'] = $this->accessclient;
       } else {
-        return array(
-          'Content-Transfer-Encoding' 	=> 'application/json',
-          'Content-type'								=> 'application/json;charset=utf-8',
-          'Authorization' 							=> 'Basic '. base64_encode($this->username . ':' . $this->password)
-        );
+        $headers['Authorization'] = 'Basic '. base64_encode($this->username . ':' . $this->password);
       }
+
+      write_log($headers);
+
+      return $headers;
     }
 
     private function getIcon() {
@@ -103,8 +105,85 @@ function wooce_payment_gateway_init() {
     }
 
     // Plugin options
-    public function init_form_fields() {
-      $this->form_fields = UI::form_fields();
+    public function init_form_fields(){
+      $this->form_fields = array(
+        'basic_settings_title' 	=> array(
+          'title' => __( 'Basis instellingen' ),
+          'type'  => 'title',
+        ),
+        'enabled' => array(
+          'title'         => 'Activeer/Deactiveer',
+          'label'         => 'Activeer Circulair Geld Gateway',
+          'type'          => 'checkbox',
+          'description'   => '',
+          'default'       => 'no'
+        ),
+        'testmode' => array(
+          'title'         => 'Test mode',
+          'label'         => 'Activeer Test Mode',
+          'type'          => 'checkbox',
+          'description'   => 'gebruikersnaam: demo, wachtwoord: 1234',
+          'default'       => 'yes',
+          'desc_tip'      => true,
+        ),
+        'username' => array(
+          'title'         => 'Gebruikersnaam',
+          'type'          => 'text',
+        ),
+        'password' => array(
+          'title'         => 'Wachtwoord',
+          'type'          => 'password',
+        ),
+        'testUserCredentials' => array(
+          'type'          => 'test_credentials_button',
+          'desc_tip'      => 'Test uw inloggegevens'
+        ),
+        'use_accessclient' => array(
+          'title'         => 'AccessClient',
+          'label'         => 'Activeer AccessClient Mode (deze optie wordt geadviseerd, bij het genereren van een token wordt deze optie automatisch geactiveerd.)',
+          'type'          => 'checkbox',
+          'description'   => 'Gebruik een anoniem token ipv uw gebruikersnaam en wachtwoord als de gebruiker wordt doorgelinkt naar de betalingspagina, deze optie heeft de voorkeur vanwege veiligheidsredenen.',
+          'default'       => 'no',
+          'desc_tip'      => true,
+        ),
+        'accessClientGenerate' => array(
+          'type'          => 'screen_button',
+          'desc_tip'      => 'gebruikersnaam, wachtwoord en uw activatie code moeten zijn ingevuld voordat de token gegenereerd kan worden!'
+        ),
+        'accessclient' => array(
+          'title'         => 'AccessClient token',
+          'type'          => 'password',
+          'description'   => 'Hier staat de automatisch gegenereerde anonieme token, hier hoeft u verder niks mee te doen.',
+          'desc_tip'      => true,
+        ),
+        'display_settings_title' => array(
+          'title'       	=> __( 'Weergave instellingen' ),
+          'type'        	=> 'title',
+          'description' 	=> 'Pas hier uw weergave instellingen van deze plugin aan. In veel gevallen zijn de standaard waardes voldoende.',
+          ),
+        'title' => array(
+          'title'        => 'Titel',
+          'type'         => 'text',
+          'description'  => 'De titel die de bezoeker tijdens check-out ziet.',
+          'default'      => 'Circulair Geld',
+        ),
+        'description' => array(
+          'title'        => 'Beschrijving',
+          'type'         => 'textarea',
+          'description'  => 'De beschrijving die de bezoeker tijdens check-out ziet.',
+          'default'      => 'Betaal met Circulair Geld.',
+        ),
+        'donate_title' 	 => array(
+          'title'        => __( ' ' ),
+          'type'         => 'title',
+        ),
+        'donate' => array(
+          'type'          => 'donate_img',
+        ),
+        'developer' => array(
+          'type'          => 'logo_dev',
+        )
+      );
     }
           
     //Back-end options validation and processing.	
@@ -123,8 +202,8 @@ function wooce_payment_gateway_init() {
       $description = "Betaling van $amount aan $shop_title";
 
       //urls
-      $url_data = "/wc-api/ce_payment_completed?order_id=$order_id&key=$order_key";
-      $successUrl = get_home_url(NULL, $url_data);
+      $url_data = "/wc-api/cg_payment_completed?order_id=$order_id&key=$order_key";
+      $successUrl = $order->get_checkout_order_received_url();
       $successWebhookUrl = get_home_url(NULL, $url_data);
       $cancelUrl = $order->get_cancel_order_url();
 
@@ -132,6 +211,9 @@ function wooce_payment_gateway_init() {
       $successUrl = apply_filters('wccg_succes_url', $successUrl, $order_id, $order_key, $url_data);
       $cancelUrl = apply_filters('wccg_cancel_url', $cancelUrl);
       $successWebhookUrl = apply_filters('wccg_webhook_url', $successWebhookUrl, $order_id, $order_key, $url_data);
+
+      write_log(array('success url', $successUrl));
+      write_log(array('success webhook url', $successWebhookUrl));
 
       //create request body
       $body = array(
@@ -153,6 +235,8 @@ function wooce_payment_gateway_init() {
       }
 
       $ticketNumber = HTTP::generate_ticket_number($this->api_endpoint, $this->headers(), $body);;
+
+      write_log($ticketNumber);
 
       if (strpos($ticketNumber, 'Error') !== false) {
         wc_add_notice($ticketNumber);
