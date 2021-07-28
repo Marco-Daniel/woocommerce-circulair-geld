@@ -15,8 +15,8 @@ function wooce_payment_gateway_init() {
       $this->id = "cg";
       $this->icon = $this->getIcon();
       $this->has_fields = false;
-      $this->method_title = __('Circulair Geld', 'circulair-geld-voor-woocommerce');
-      $this->method_description = __('Accepteer betalingen met Circulair Geld', 'circulair-geld-voor-woocommerce');
+      $this->method_title = __('Circulair Geld', 'circulair-geld');
+      $this->method_description = __('Accepteer betalingen met Circulair Geld', 'circulair-geld');
 
       $this->supports = array('products');
       $this->init_form_fields();
@@ -59,7 +59,7 @@ function wooce_payment_gateway_init() {
 
     public function admin_options() {
       ?>
-        <h2> <?php __('Circulair Geld', 'circulair-geld-voor-woocommerce'); ?></h2>
+        <h2> <?php __('Circulair Geld', 'circulair-geld'); ?></h2>
         <table class="form-table">
           <?php $this->generate_settings_html(); ?>
         </table>
@@ -108,73 +108,73 @@ function wooce_payment_gateway_init() {
     public function init_form_fields(){
       $this->form_fields = array(
         'basic_settings_title' 	=> array(
-          'title' => __( 'Basis instellingen', 'circulair-geld-voor-woocommerce' ),
+          'title' => __( 'Basis instellingen', 'circulair-geld' ),
           'type'  => 'title',
         ),
         'enabled' => array(
-          'title'         => __('Activeer/Deactiveer', 'circulair-geld-voor-woocommerce' ),
-          'label'         => __('Activeer Circulair Geld Gateway', 'circulair-geld-voor-woocommerce' ),
+          'title'         => __('Activeer/Deactiveer', 'circulair-geld' ),
+          'label'         => __('Activeer Circulair Geld Gateway', 'circulair-geld' ),
           'type'          => 'checkbox',
           'description'   => '',
           'default'       => 'no'
         ),
         'testmode' => array(
-          'title'         => __('Test mode', 'circulair-geld-voor-woocommerce' ),
-          'label'         => __('Activeer Test Mode', 'circulair-geld-voor-woocommerce' ),
+          'title'         => __('Test mode', 'circulair-geld' ),
+          'label'         => __('Activeer Test Mode', 'circulair-geld' ),
           'type'          => 'checkbox',
-          'description'   => __('gebruikersnaam: demo, wachtwoord: 1234', 'circulair-geld-voor-woocommerce' ),
+          'description'   => __('gebruikersnaam: demo, wachtwoord: 1234', 'circulair-geld' ),
           'default'       => 'yes',
           'desc_tip'      => true,
         ),
         'username' => array(
-          'title'         => __('Gebruikersnaam', 'circulair-geld-voor-woocommerce' ),
+          'title'         => __('Gebruikersnaam', 'circulair-geld' ),
           'type'          => 'text',
         ),
         'password' => array(
-          'title'         => __('Wachtwoord', 'circulair-geld-voor-woocommerce' ),
+          'title'         => __('Wachtwoord', 'circulair-geld' ),
           'type'          => 'password',
         ),
         'testUserCredentials' => array(
           'type'          => 'test_credentials_button',
-          'desc_tip'      => __('Test uw inloggegevens', 'circulair-geld-voor-woocommerce' )
+          'desc_tip'      => __('Test uw inloggegevens', 'circulair-geld' )
         ),
         'use_accessclient' => array(
-          'title'         => __('AccessClient', 'circulair-geld-voor-woocommerce' ),
-          'label'         => __('Activeer AccessClient Mode (deze optie wordt geadviseerd, bij het genereren van een token wordt deze optie automatisch geactiveerd.)', 'circulair-geld-voor-woocommerce' ),
+          'title'         => __('AccessClient', 'circulair-geld' ),
+          'label'         => __('Activeer AccessClient Mode (deze optie wordt geadviseerd, bij het genereren van een token wordt deze optie automatisch geactiveerd.)', 'circulair-geld' ),
           'type'          => 'checkbox',
-          'description'   => __('Gebruik een anoniem token ipv uw gebruikersnaam en wachtwoord als de gebruiker wordt doorgelinkt naar de betalingspagina, deze optie heeft de voorkeur vanwege veiligheidsredenen.', 'circulair-geld-voor-woocommerce' ),
+          'description'   => __('Gebruik een anoniem token ipv uw gebruikersnaam en wachtwoord als de gebruiker wordt doorgelinkt naar de betalingspagina, deze optie heeft de voorkeur vanwege veiligheidsredenen.', 'circulair-geld' ),
           'default'       => 'no',
           'desc_tip'      => true,
         ),
         'accessClientGenerate' => array(
           'type'          => 'screen_button',
-          'desc_tip'      => __('gebruikersnaam, wachtwoord en uw activatie code moeten zijn ingevuld voordat de token gegenereerd kan worden!', 'circulair-geld-voor-woocommerce' )
+          'desc_tip'      => __('gebruikersnaam, wachtwoord en uw activatie code moeten zijn ingevuld voordat de token gegenereerd kan worden!', 'circulair-geld' )
         ),
         'accessclient' => array(
-          'title'         => __('AccessClient token', 'circulair-geld-voor-woocommerce' ),
+          'title'         => __('AccessClient token', 'circulair-geld' ),
           'type'          => 'password',
-          'description'   => __('Hier staat de automatisch gegenereerde anonieme token, hier hoeft u verder niks mee te doen.', 'circulair-geld-voor-woocommerce' ),
+          'description'   => __('Hier staat de automatisch gegenereerde anonieme token, hier hoeft u verder niks mee te doen.', 'circulair-geld' ),
           'desc_tip'      => true,
         ),
         'display_settings_title' => array(
-          'title'       	=> __( 'Weergave instellingen', 'circulair-geld-voor-woocommerce'  ),
+          'title'       	=> __( 'Weergave instellingen', 'circulair-geld'  ),
           'type'        	=> 'title',
-          'description' 	=> __('Pas hier uw weergave instellingen van deze plugin aan. In veel gevallen zijn de standaard waardes voldoende.', 'circulair-geld-voor-woocommerce' ),
+          'description' 	=> __('Pas hier uw weergave instellingen van deze plugin aan. In veel gevallen zijn de standaard waardes voldoende.', 'circulair-geld' ),
           ),
         'title' => array(
-          'title'        => __('Titel', 'circulair-geld-voor-woocommerce' ),
+          'title'        => __('Titel', 'circulair-geld' ),
           'type'         => 'text',
-          'description'  => __('De titel die de bezoeker tijdens check-out ziet.', 'circulair-geld-voor-woocommerce' ),
-          'default'      => __('Circulair Geld', 'circulair-geld-voor-woocommerce' ),
+          'description'  => __('De titel die de bezoeker tijdens check-out ziet.', 'circulair-geld' ),
+          'default'      => __('Circulair Geld', 'circulair-geld' ),
         ),
         'description' => array(
-          'title'        => __('Beschrijving', 'circulair-geld-voor-woocommerce' ),
+          'title'        => __('Beschrijving', 'circulair-geld' ),
           'type'         => 'textarea',
-          'description'  => __('De beschrijving die de bezoeker tijdens check-out ziet.', 'circulair-geld-voor-woocommerce' ),
-          'default'      => __('Betaal met Circulair Geld.', 'circulair-geld-voor-woocommerce' ),
+          'description'  => __('De beschrijving die de bezoeker tijdens check-out ziet.', 'circulair-geld' ),
+          'default'      => __('Betaal met Circulair Geld.', 'circulair-geld' ),
         ),
         'donate_title' 	 => array(
-          'title'        => __(' ', 'circulair-geld-voor-woocommerce'),
+          'title'        => __(' ', 'circulair-geld'),
           'type'         => 'title',
         ),
         'donate' => array(
@@ -199,7 +199,7 @@ function wooce_payment_gateway_init() {
       $order_key = $order->get_order_key();
       $amount = $order->get_total();
       $shop_title = get_bloginfo('name');
-      $description = sprintf(__('Betaling van %1$s aan %2$s', 'circulair-geld-voor-woocommerce'), $amount, $shop_title);
+      $description = sprintf(__('Betaling van %1$s aan %2$s', 'circulair-geld'), $amount, $shop_title);
 
       //urls
       $url_data = "/wc-api/cg_payment_completed?order_id=$order_id&key=$order_key";
@@ -261,12 +261,12 @@ function wooce_payment_gateway_init() {
         if (!empty($transactionNumber)) {
           $order->payment_complete($transactionNumber);
           $order->reduce_order_stock();
-          $note = sprintf(__('Bestelling compleet met transactie-ID: %s', 'circulair-geld-voor-woocommerce' ), $transactionNumber);
+          $note = sprintf(__('Bestelling compleet met transactie-ID: %s', 'circulair-geld' ), $transactionNumber);
           $order->add_order_note($note);
         }
       } catch (Exception $e) {
-        $order->update_status(__('Mislukt', 'circulair-geld-voor-woocommerce'), sprintf(__('Foutmelding: %1$s', 'circulair-geld-voor-woocommerce'), $e));
-        $note = sprintf(__('Foutmelding: %1$s', 'circulair-geld-voor-woocommerce'), $e);
+        $order->update_status(__('Mislukt', 'circulair-geld'), sprintf(__('Foutmelding: %1$s', 'circulair-geld'), $e));
+        $note = sprintf(__('Foutmelding: %1$s', 'circulair-geld'), $e);
         $order->add_order_note($note);
       }
 

@@ -29,19 +29,19 @@ class HTTP {
   
     switch($response_code) {
       case 200:
-        \WC_Admin_Settings::add_message(__('AccessClient is met succes geactiveerd.', 'circulair-geld-voor-woocommerce'));
+        \WC_Admin_Settings::add_message(__('AccessClient is met succes geactiveerd.', 'circulair-geld'));
         $response_body = wp_remote_retrieve_body($response);
         $json = json_decode($response_body);
   
         return $json->token;
       case 401:
-        \WC_Admin_Settings::add_error(__('Error: Verkeerde gebruikersnaam en/of wachtwoord.', 'circulair-geld-voor-woocommerce'));
+        \WC_Admin_Settings::add_error(__('Error: Verkeerde gebruikersnaam en/of wachtwoord.', 'circulair-geld'));
         return null;
       case 404:
-        \WC_Admin_Settings::add_error(__('Error: Uw aanvraag mist informatie, klopt uw activatiecode wel?', 'circulair-geld-voor-woocommerce'));
+        \WC_Admin_Settings::add_error(__('Error: Uw aanvraag mist informatie, klopt uw activatiecode wel?', 'circulair-geld'));
         return null;
       default:
-        \WC_Admin_Settings::add_error(__('Error: Er is een onverwachte fout opgetreden.', 'circulair-geld-voor-woocommerce'));
+        \WC_Admin_Settings::add_error(__('Error: Er is een onverwachte fout opgetreden.', 'circulair-geld'));
         return null;
     }
   }
@@ -65,13 +65,13 @@ class HTTP {
   
     switch ($response_code) {
       case 200:
-        \WC_Admin_Settings::add_message(__('Uw inloggegevens zijn succesvol geverifieerd.', 'circulair-geld-voor-woocommerce'));
+        \WC_Admin_Settings::add_message(__('Uw inloggegevens zijn succesvol geverifieerd.', 'circulair-geld'));
         break;
       case 401:
-        \WC_Admin_Settings::add_error(__('Uw inloggegevens zijn niet juist.', 'circulair-geld-voor-woocommerce'));
+        \WC_Admin_Settings::add_error(__('Uw inloggegevens zijn niet juist.', 'circulair-geld'));
         break;
       default:
-        \WC_Admin_Settings::add_error(__('Er is een onbekende fout opgetreden.', 'circulair-geld-voor-woocommerce'));
+        \WC_Admin_Settings::add_error(__('Er is een onbekende fout opgetreden.', 'circulair-geld'));
         break;
     }
   
@@ -92,7 +92,7 @@ class HTTP {
     );
   
     if ( is_wp_error($response) ) {
-        return __('Error: ', 'circulair-geld-voor-woocommerce') . $response->get_error_message();
+        return __('Error: ', 'circulair-geld') . $response->get_error_message();
     } else {
       $response_body = wp_remote_retrieve_body($response);
       $json = json_decode($response_body);
@@ -104,7 +104,7 @@ class HTTP {
           // succes
           return $json->ticketNumber;
           default:
-          return __('Error: Er is een onbekende foutcode: ', 'circulair-geld-voor-woocommerce') . $response_code;
+          return __('Error: Er is een onbekende foutcode: ', 'circulair-geld') . $response_code;
           break;
       }
     }
@@ -138,24 +138,24 @@ class HTTP {
             }
             return NULL;
         case 401:
-            $error = __('Geen inloggegevens', 'circulair-geld-voor-woocommerce');
+            $error = __('Geen inloggegevens', 'circulair-geld');
             break;
         case 403:
-            $error = __('Toegang geweigerd', 'circulair-geld-voor-woocommerce');
+            $error = __('Toegang geweigerd', 'circulair-geld');
             break;
         case 404:
-            $error = __('Ticket niet gevonden', 'circulair-geld-voor-woocommerce');
+            $error = __('Ticket niet gevonden', 'circulair-geld');
             break;
         case 422:
-            $error = __('Ongeldig ticket', 'circulair-geld-voor-woocommerce');
+            $error = __('Ongeldig ticket', 'circulair-geld');
             break;
         case 500:
             // An error has occurred generating the payment
             if ($json->code == 'insufficientBalance') {
-                $error = __('Niet genoeg saldo.', 'circulair-geld-voor-woocommerce');
+                $error = __('Niet genoeg saldo.', 'circulair-geld');
                 break;
             } else if ($json->code == 'destinationUpperLimitReached') {
-                $error = __('Maximale kredietlimiet bereikt.', 'circulair-geld-voor-woocommerce');
+                $error = __('Maximale kredietlimiet bereikt.', 'circulair-geld');
                 break;
             } else {
                 // There are more error codes but for now only these two
@@ -163,7 +163,7 @@ class HTTP {
                 error_log("An unexpected error has occurred processing the ticket (type = {$json->exceptionType}, message = {$json->exceptionMessage})");
             }
         default:
-            $error = __('Er is een onbekende fout opgetreden: ', 'circulair-geld-voor-woocommerce') . $response_code;
+            $error = __('Er is een onbekende fout opgetreden: ', 'circulair-geld') . $response_code;
             break;
     }
     
