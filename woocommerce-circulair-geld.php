@@ -2,11 +2,13 @@
 
 /**
  * Plugin Name: Circulair Geld voor WooCommerce
- * Plugin URI: https://mddd.nl
- * Description: Een WordPress plugin die Circulair Geld betlaingen mogelijk maakt voor WooCommerce.
+ * Plugin URI: https://mddd.nl/circulair-geld-wordpress-woocommerce-plugin/
+ * Description: Een WordPress plugin die Circulair Geld betalingen mogelijk maakt voor WooCommerce.
+ * Version: 1.0.3
  * Author: M.D. Leguijt | M.D. Design & Development
  * Author URI: https://mddd.nl
- * Version: 1.0.2
+ * License: GPLv2 or later
+ * Text Domain: circulair-geld-voor-woocommerce
  */
 
 if (!defined('ABSPATH')) {

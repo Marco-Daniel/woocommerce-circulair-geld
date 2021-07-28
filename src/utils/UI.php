@@ -9,8 +9,8 @@ class UI {
       'class'         => 'button-secondary',
       'desc_tip'      => false,
       'description'   => '',
-      'title'         => 'Genereer AccessClient token',
-      'button_title'  => 'Genereer token'
+      'title'         => __('Genereer AccessClient token', 'circulair-geld-voor-woocommerce'),
+      'button_title'  => __('Genereer token', 'circulair-geld-voor-woocommerce')
     );
 
     $data = wp_parse_args( $data, $defaults );
@@ -35,11 +35,11 @@ class UI {
               <?php echo wp_kses_post( $data['button_title'] ); ?>
             </button>
             <p class="description">
-              Log in op uw Circulaire Geld account en ga naar:
-              <br> Persoonlijk > Instellingen > Webshop koppelingen > toegangscodes > Toevoegen > [Vul een beschrijving in] > Opslaan > Activatiecode > Bevestigen
-              <br> Vul de vier-cijferige code hierboven in en klik op <b><?php echo wp_kses_post( $data['button_title'] ); ?></b>.
+              <?php __('Log in op uw Circulaire Geld account en ga naar:', 'circulair-geld-voor-woocommerce'); ?>
+              <br> <?php __('Persoonlijk > Instellingen > Webshop koppelingen > toegangscodes > Toevoegen > [Vul een beschrijving in] > Opslaan > Activatiecode > Bevestigen', 'circulair-geld-voor-woocommerce'); ?>
+              <br> <?php __('Vul de vier-cijferige code hierboven in en klik op', 'circulair-geld-voor-woocommerce'); ?> <b><?php echo wp_kses_post( $data['button_title'] ); ?></b>.
               <br>
-              <br> <u>Als u deze instellingen niet kan vinden in uw CG-account, dan moeten deze instellingen nog geactiveerd worden voor u.</u>
+              <br> <u> <?php __('Als u deze instellingen niet kan vinden in uw CG-account, dan moeten deze instellingen nog geactiveerd worden voor u.', 'circulair-geld-voor-woocommerce'); ?></u>
             </p>
           </form>
         </fieldset>
@@ -55,8 +55,8 @@ class UI {
       'class'         => 'button-secondary',
       'desc_tip'      => false,
       'description'   => '',
-      'title'         => 'Test inloggegevens',
-      'button_title'  => 'Test inloggegevens'
+      'title'         => __('Test inloggegevens', 'circulair-geld-voor-woocommerce'),
+      'button_title'  => __('Test inloggegevens', 'circulair-geld-voor-woocommerce')
     );
 
     $data = wp_parse_args( $data, $defaults );
@@ -81,7 +81,7 @@ class UI {
               <?php echo wp_kses_post( $data['button_title'] ); ?>
             </button>
             <p class="description">
-              Vergeet <em>niet</em> om eerst uw gebruikersnaam en wachtwoord op te slaan middels de knop onder aan deze pagina.
+              <?php __('Vergeet niet om eerst uw gebruikersnaam en wachtwoord op te slaan middels de knop onder aan deze pagina.', 'circulair-geld-voor-woocommerce'); ?>
             </p>
           </form>
         </fieldset>
@@ -96,7 +96,7 @@ class UI {
     $defaults = array(
       'desc_tip'      => false,
       'description'   => '',
-      'title'         => 'Scan de QR-code en doneer om bij te dragen aan de verdere ontwikkeling deze plugin.',
+      'title'         => __('Scan de QR-code en doneer om bij te dragen aan de verdere ontwikkeling deze plugin.', 'circulair-geld-voor-woocommerce'),
     );
     $data = wp_parse_args($data, $defaults);
 
@@ -107,7 +107,7 @@ class UI {
         <label for="<?php echo esc_attr( $field ); ?>"><?php echo wp_kses_post( $data['title'] ); ?></label>
       </th>
       <td>
-        <img src="<?php echo MDDD_CG_PLUGIN_DIR_URL.'/assets/qr-code.png'?>" alt="doneer middels qr-code" />
+        <img src="<?php echo MDDD_CG_PLUGIN_DIR_URL.'/assets/qr-code.png'?>" alt=<?php __( 'doneer middels qr-code', 'circulair-geld-voor-woocommerce') ?> />
       </td>
     </tr>
     <?php
@@ -119,7 +119,7 @@ class UI {
     $defaults = array(
       'desc_tip'     => false,
       'description'  => '',
-      'title'      	=> 'Deze plugin wordt u aangeboden door:',
+      'title'      	=> __('Deze plugin wordt u aangeboden door:', 'circulair-geld-voor-woocommerce'),
     );
     $data = wp_parse_args( $data, $defaults );
 
