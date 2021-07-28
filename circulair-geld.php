@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Circulair Geld
- * Plugin URI: https://mddd.nl/circulair-geld-wordpress-woocommerce-plugin/
+ * Plugin URI: https://github.com/Marco-Daniel/circulair-geld
  * Description: Een WordPress plugin die Circulair Geld betalingen mogelijk maakt voor WooCommerce.
  * Version: 1.0.3
  * Author: M.D. Leguijt | M.D. Design & Development
