@@ -39,8 +39,9 @@ function wooce_payment_gateway_init() {
       // test user credentials if button is clicked
       if(array_key_exists('generateAccesclientButton',$_POST)) {
         if( !empty($_POST['accessClientCode'])) {
-          $accesscode = $_POST['accessClientCode'];
+          $accesscode = sanitize_text_field($_POST['accessClientCode']);
           $token = HTTP::generate_accessclient_token($this->cg_url.'/api', $accesscode, $this->username, $this->password);
+
           $this->update_option('accessclient', $token);
           $this->update_option('use_accessclient', 'yes');
         }
@@ -251,9 +252,9 @@ function wooce_payment_gateway_init() {
 
     // webhook to let WP know to finalize payment
     public function webhook() { 
-      $order_id = $_GET['orderId'];
+      $order_id = sanitize_text_field($_GET['orderId']);
       $order = wc_get_order( $order_id );
-      $ticketNumber = $_GET['ticketNumber'];
+      $ticketNumber = sanitize_text_field($_GET['ticketNumber']);
       
       try {
         $transactionNumber = HTTP::process_ticket($this->api_endpoint, $this->headers(), $ticketNumber, $order_id);
