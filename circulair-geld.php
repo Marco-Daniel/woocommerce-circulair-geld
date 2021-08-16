@@ -24,7 +24,7 @@ require_once(MDDD_CG_PLUGIN_DIR_PATH.'/src/class.php');
 
 // add link to settings on plugin page
 add_filter( 'plugin_action_links_'.plugin_basename(__FILE__), function($links) {
-  $links[] = '<a href="'.admin_url( 'admin.php?page=wc-settings&tab=checkout&section=CG').'">Instellingen</a>';
+  $links[] = '<a href="'.admin_url( 'admin.php?page=wc-settings&tab=checkout&section=CG').'">'. __('Instellingen', 'circulair-geld') . '</a>';
   return $links;
 });
 
@@ -40,7 +40,7 @@ add_action('plugins_loaded', 'wooce_payment_gateway_init');
 // register activation hook
 register_activation_hook( __FILE__, function() {
   if (!class_exists('WooCommerce')) {
-    die('WooCommerce is niet geactiveerd.');
+    die(__('WooCommerce is niet geactiveerd.', 'circulair-geld'));
   }
 });
 
