@@ -15,8 +15,8 @@ function wooce_payment_gateway_init() {
       $this->id = "cg";
       $this->icon = $this->getIcon();
       $this->has_fields = false;
-      $this->method_title = __('Circulair Geld', 'circulair-geld');
-      $this->method_description = __('Accepteer betalingen met Circulair Geld', 'circulair-geld');
+      $this->method_title = __('Circulair Currency', 'circulair-geld');
+      $this->method_description = __('Accept payments with Circulair Currency', 'circulair-geld');
 
       $this->supports = array('products');
       $this->init_form_fields();
@@ -60,7 +60,7 @@ function wooce_payment_gateway_init() {
 
     public function admin_options() {
       ?>
-        <h2> <?php __('Circulair Geld', 'circulair-geld'); ?></h2>
+        <h2> <?php __('Circulair Currency', 'circulair-geld'); ?></h2>
         <table class="form-table">
           <?php $this->generate_settings_html(); ?>
         </table>
@@ -109,70 +109,70 @@ function wooce_payment_gateway_init() {
     public function init_form_fields(){
       $this->form_fields = array(
         'basic_settings_title' 	=> array(
-          'title' => __( 'Basis instellingen', 'circulair-geld' ),
+          'title' => __( 'Basic Settings', 'circulair-geld' ),
           'type'  => 'title',
         ),
         'enabled' => array(
-          'title'         => __('Activeer/Deactiveer', 'circulair-geld' ),
-          'label'         => __('Activeer Circulair Geld Gateway', 'circulair-geld' ),
+          'title'         => __('Activate/Deactivate', 'circulair-geld' ),
+          'label'         => __('Activate Circulair Currency Gateway', 'circulair-geld' ),
           'type'          => 'checkbox',
           'description'   => '',
           'default'       => 'no'
         ),
         'testmode' => array(
           'title'         => __('Test mode', 'circulair-geld' ),
-          'label'         => __('Activeer Test Mode', 'circulair-geld' ),
+          'label'         => __('Activate Test Mode', 'circulair-geld' ),
           'type'          => 'checkbox',
-          'description'   => __('gebruikersnaam: demo, wachtwoord: 1234', 'circulair-geld' ),
+          'description'   => __('username: demo, password: 1234', 'circulair-geld' ),
           'default'       => 'yes',
           'desc_tip'      => true,
         ),
         'username' => array(
-          'title'         => __('Gebruikersnaam', 'circulair-geld' ),
+          'title'         => __('Username', 'circulair-geld' ),
           'type'          => 'text',
         ),
         'password' => array(
-          'title'         => __('Wachtwoord', 'circulair-geld' ),
+          'title'         => __('Password', 'circulair-geld' ),
           'type'          => 'password',
         ),
         'testUserCredentials' => array(
           'type'          => 'test_credentials_button',
-          'desc_tip'      => __('Test uw inloggegevens', 'circulair-geld' )
+          'desc_tip'      => __('Test your credentials', 'circulair-geld' )
         ),
         'use_accessclient' => array(
           'title'         => __('AccessClient', 'circulair-geld' ),
-          'label'         => __('Activeer AccessClient Mode (deze optie wordt geadviseerd, bij het genereren van een token wordt deze optie automatisch geactiveerd.)', 'circulair-geld' ),
+          'label'         => __('Activate AccessClient Mode (this option is recommended, when generating a token this option is activated by default.)', 'circulair-geld' ),
           'type'          => 'checkbox',
-          'description'   => __('Gebruik een anoniem token ipv uw gebruikersnaam en wachtwoord als de gebruiker wordt doorgelinkt naar de betalingspagina, deze optie heeft de voorkeur vanwege veiligheidsredenen.', 'circulair-geld' ),
+          'description'   => __('Use an anonymus token instead of your credentials when the user is redirected to the payment screen, it is advised to use this option for enhanced security.', 'circulair-geld' ),
           'default'       => 'no',
           'desc_tip'      => true,
         ),
         'accessClientGenerate' => array(
           'type'          => 'screen_button',
-          'desc_tip'      => __('gebruikersnaam, wachtwoord en uw activatie code moeten zijn ingevuld voordat de token gegenereerd kan worden!', 'circulair-geld' )
+          'desc_tip'      => __('Username, password and activation code have to be submitted for the token to be generated!', 'circulair-geld' )
         ),
         'accessclient' => array(
           'title'         => __('AccessClient token', 'circulair-geld' ),
           'type'          => 'password',
-          'description'   => __('Hier staat de automatisch gegenereerde anonieme token, hier hoeft u verder niks mee te doen.', 'circulair-geld' ),
+          'description'   => __('Do not edit this field. This is you generated token.', 'circulair-geld' ),
           'desc_tip'      => true,
         ),
         'display_settings_title' => array(
-          'title'       	=> __( 'Weergave instellingen', 'circulair-geld'  ),
+          'title'       	=> __( 'Display settings', 'circulair-geld'  ),
           'type'        	=> 'title',
-          'description' 	=> __('Pas hier uw weergave instellingen van deze plugin aan. In veel gevallen zijn de standaard waardes voldoende.', 'circulair-geld' ),
+          'description' 	=> __('Edit your display settings. In most cases the defaults are what you need.', 'circulair-geld' ),
           ),
         'title' => array(
           'title'        => __('Titel', 'circulair-geld' ),
           'type'         => 'text',
-          'description'  => __('De titel die de bezoeker tijdens check-out ziet.', 'circulair-geld' ),
-          'default'      => __('Circulair Geld', 'circulair-geld' ),
+          'description'  => __('Title during checkout', 'circulair-geld' ),
+          'default'      => __('Circulair Currency', 'circulair-geld' ),
         ),
         'description' => array(
-          'title'        => __('Beschrijving', 'circulair-geld' ),
+          'title'        => __('Description', 'circulair-geld' ),
           'type'         => 'textarea',
-          'description'  => __('De beschrijving die de bezoeker tijdens check-out ziet.', 'circulair-geld' ),
-          'default'      => __('Betaal met Circulair Geld.', 'circulair-geld' ),
+          'description'  => __('Description during checkout', 'circulair-geld' ),
+          'default'      => __('Pay with Circulair Currency.', 'circulair-geld' ),
         ),
         'donate_title' 	 => array(
           'title'        => __(' ', 'circulair-geld'),
@@ -200,7 +200,7 @@ function wooce_payment_gateway_init() {
       $order_key = $order->get_order_key();
       $amount = $order->get_total();
       $shop_title = get_bloginfo('name');
-      $description = sprintf(__('Betaling van %1$s aan %2$s', 'circulair-geld'), $amount, $shop_title);
+      $description = sprintf(__('Payment from %1$s to %2$s', 'circulair-geld'), $amount, $shop_title);
 
       //urls
       $url_data = "/wc-api/cg_payment_completed?order_id=$order_id&key=$order_key";
@@ -262,12 +262,12 @@ function wooce_payment_gateway_init() {
         if (!empty($transactionNumber)) {
           $order->payment_complete($transactionNumber);
           $order->reduce_order_stock();
-          $note = sprintf(__('Bestelling compleet met transactie-ID: %s', 'circulair-geld' ), $transactionNumber);
+          $note = sprintf(__('Order completed with transaction-ID: %s', 'circulair-geld' ), $transactionNumber);
           $order->add_order_note($note);
         }
       } catch (Exception $e) {
-        $order->update_status(__('Mislukt', 'circulair-geld'), sprintf(__('Foutmelding: %1$s', 'circulair-geld'), $e));
-        $note = sprintf(__('Foutmelding: %1$s', 'circulair-geld'), $e);
+        $order->update_status(__('Failed', 'circulair-geld'), sprintf(__('Error: %1$s', 'circulair-geld'), $e));
+        $note = sprintf(__('Error: %1$s', 'circulair-geld'), $e);
         $order->add_order_note($note);
       }
 

@@ -9,8 +9,8 @@ class UI {
       'class'         => 'button-secondary',
       'desc_tip'      => false,
       'description'   => '',
-      'title'         => __('Genereer AccessClient token', 'circulair-geld'),
-      'button_title'  => __('Genereer token', 'circulair-geld')
+      'title'         => __('Generate AccessClient token', 'circulair-geld'),
+      'button_title'  => __('Generate token', 'circulair-geld')
     );
 
     $data = wp_parse_args( $data, $defaults );
@@ -26,7 +26,7 @@ class UI {
         <fieldset>
           <legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
           <form method="post" name="accessClientForm" id="accessClientForm" action="">
-            <input type="text" id="accessClientCode" name="accessClientCode" placeholder="AccessClient Activatie Code">
+            <input type="text" id="accessClientCode" name="accessClientCode" placeholder="<?php esc_attr_e('AccessClient Activation Code', 'circulair-geld'); ?>">
             <button type="submit" class="<?php echo esc_attr( $data['class'] ); ?>" 
               type="submit" 
               name="generateAccesclientButton" 
@@ -35,11 +35,11 @@ class UI {
               <?php echo wp_kses_post( $data['button_title'] ); ?>
             </button>
             <p class="description">
-              <?php __('Log in op uw Circulaire Geld account en ga naar:', 'circulair-geld'); ?>
-              <br> <?php __('Persoonlijk > Instellingen > Webshop koppelingen > toegangscodes > Toevoegen > [Vul een beschrijving in] > Opslaan > Activatiecode > Bevestigen', 'circulair-geld'); ?>
-              <br> <?php __('Vul de vier-cijferige code hierboven in en klik op', 'circulair-geld'); ?> <b><?php echo wp_kses_post( $data['button_title'] ); ?></b>.
+              <?php __('Log in to your Circulair Currency account and go to:', 'circulair-geld'); ?>
+              <br> <?php __('Personal > Settings > Webshop connections > accesscodes > Add > [Enter description] > Save > Activatiecode > Confirm', 'circulair-geld'); ?>
+              <br> <?php __('Enter your four-digit code above and click', 'circulair-geld'); ?> <b><?php echo wp_kses_post( $data['button_title'] ); ?></b>.
               <br>
-              <br> <u> <?php __('Als u deze instellingen niet kan vinden in uw CG-account, dan moeten deze instellingen nog geactiveerd worden voor u.', 'circulair-geld'); ?></u>
+              <br> <u> <?php __('If you cannot find these settings in your CG-account, then these settings need to be activated for your account.', 'circulair-geld'); ?></u>
             </p>
           </form>
         </fieldset>
@@ -55,8 +55,8 @@ class UI {
       'class'         => 'button-secondary',
       'desc_tip'      => false,
       'description'   => '',
-      'title'         => __('Test inloggegevens', 'circulair-geld'),
-      'button_title'  => __('Test inloggegevens', 'circulair-geld')
+      'title'         => __('Test credentials', 'circulair-geld'),
+      'button_title'  => __('Test credentials', 'circulair-geld')
     );
 
     $data = wp_parse_args( $data, $defaults );
@@ -81,7 +81,7 @@ class UI {
               <?php echo wp_kses_post( $data['button_title'] ); ?>
             </button>
             <p class="description">
-              <?php __('Vergeet niet om eerst uw gebruikersnaam en wachtwoord op te slaan middels de knop onder aan deze pagina.', 'circulair-geld'); ?>
+              <?php __('Don\'t forget to save you\'re credentials with the button at the bottom of this page!', 'circulair-geld'); ?>
             </p>
           </form>
         </fieldset>
@@ -96,7 +96,7 @@ class UI {
     $defaults = array(
       'desc_tip'      => false,
       'description'   => '',
-      'title'         => __('Scan de QR-code en doneer om bij te dragen aan de verdere ontwikkeling deze plugin.', 'circulair-geld'),
+      'title'         => __('Scan the QR-code to donate to further the development of this plugin.', 'circulair-geld'),
     );
     $data = wp_parse_args($data, $defaults);
 
@@ -107,7 +107,7 @@ class UI {
         <label for="<?php echo esc_attr( $field ); ?>"><?php echo wp_kses_post( $data['title'] ); ?></label>
       </th>
       <td>
-        <img src="<?php echo MDDD_CG_PLUGIN_DIR_URL.'/assets/qr-code.png'?>" alt=<?php __( 'doneer middels qr-code', 'circulair-geld') ?> />
+        <img src="<?php echo MDDD_CG_PLUGIN_DIR_URL.'/assets/qr-code.png'?>" alt=<?php __( 'donate using qr-code', 'circulair-geld') ?> />
       </td>
     </tr>
     <?php
@@ -119,7 +119,7 @@ class UI {
     $defaults = array(
       'desc_tip'     => false,
       'description'  => '',
-      'title'      	=> __('Deze plugin wordt u aangeboden door:', 'circulair-geld'),
+      'title'      	=> __('This plugin is made possible by:', 'circulair-geld'),
     );
     $data = wp_parse_args( $data, $defaults );
 
