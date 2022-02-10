@@ -74,7 +74,7 @@ function wooce_payment_gateway_init() {
         'Content-type' 								=> 'application/json;charset=utf-8',
       ); 
 
-      if ($this->use_accessclient || !$this->testmode) {
+      if ($this->use_accessclient && !$this->testmode) {
         $headers['Access-Client-Token'] = $this->accessclient;
       } else {
         $headers['Authorization'] = 'Basic '. base64_encode($this->username . ':' . $this->password);
