@@ -29,19 +29,19 @@ class HTTP {
   
     switch($response_code) {
       case 200:
-        \WC_Admin_Settings::add_message(__('AccessClient is met succes geactiveerd.', 'circulair-geld'));
+        \WC_Admin_Settings::add_message(__('AccessClient has successfully been activated.', 'circulair-geld'));
         $response_body = wp_remote_retrieve_body($response);
         $json = json_decode($response_body);
   
         return $json->token;
       case 401:
-        \WC_Admin_Settings::add_error(__('Error: Verkeerde gebruikersnaam en/of wachtwoord.', 'circulair-geld'));
+        \WC_Admin_Settings::add_error(__('Error: Wrong username and/or password.', 'circulair-geld'));
         return null;
       case 404:
-        \WC_Admin_Settings::add_error(__('Error: Uw aanvraag mist informatie, klopt uw activatiecode wel?', 'circulair-geld'));
+        \WC_Admin_Settings::add_error(__('Error: Your submission is missing data, is your activation code valid?', 'circulair-geld'));
         return null;
       default:
-        \WC_Admin_Settings::add_error(__('Error: Er is een onverwachte fout opgetreden.', 'circulair-geld'));
+        \WC_Admin_Settings::add_error(__('Error: an unknown error has occurred.', 'circulair-geld'));
         return null;
     }
   }
@@ -65,13 +65,13 @@ class HTTP {
   
     switch ($response_code) {
       case 200:
-        \WC_Admin_Settings::add_message(__('Uw inloggegevens zijn succesvol geverifieerd.', 'circulair-geld'));
+        \WC_Admin_Settings::add_message(__('Your credentials have ben validated.', 'circulair-geld'));
         break;
       case 401:
-        \WC_Admin_Settings::add_error(__('Uw inloggegevens zijn niet juist.', 'circulair-geld'));
+        \WC_Admin_Settings::add_error(__('Your credentials are incorrect.', 'circulair-geld'));
         break;
       default:
-        \WC_Admin_Settings::add_error(__('Er is een onbekende fout opgetreden.', 'circulair-geld'));
+        \WC_Admin_Settings::add_error(__('An unknown error has occurred.', 'circulair-geld'));
         break;
     }
   
@@ -104,7 +104,7 @@ class HTTP {
           // succes
           return $json->ticketNumber;
           default:
-          return __('Error: Er is een onbekende foutcode: ', 'circulair-geld') . $response_code;
+          return __('Error: unknown responsecode: %s', 'circulair-geld') . $response_code;
           break;
       }
     }
@@ -138,24 +138,24 @@ class HTTP {
             }
             return NULL;
         case 401:
-            $error = __('Geen inloggegevens', 'circulair-geld');
+            $error = __('No credentials', 'circulair-geld');
             break;
         case 403:
-            $error = __('Toegang geweigerd', 'circulair-geld');
+            $error = __('Access denied', 'circulair-geld');
             break;
         case 404:
-            $error = __('Ticket niet gevonden', 'circulair-geld');
+            $error = __('Ticket not found', 'circulair-geld');
             break;
         case 422:
-            $error = __('Ongeldig ticket', 'circulair-geld');
+            $error = __('Invalid ticket', 'circulair-geld');
             break;
         case 500:
             // An error has occurred generating the payment
             if ($json->code == 'insufficientBalance') {
-                $error = __('Niet genoeg saldo.', 'circulair-geld');
+                $error = __('Not enough balance.', 'circulair-geld');
                 break;
             } else if ($json->code == 'destinationUpperLimitReached') {
-                $error = __('Maximale kredietlimiet bereikt.', 'circulair-geld');
+                $error = __('Maximum credit limit reached.', 'circulair-geld');
                 break;
             } else {
                 // There are more error codes but for now only these two
@@ -163,7 +163,7 @@ class HTTP {
                 error_log("An unexpected error has occurred processing the ticket (type = {$json->exceptionType}, message = {$json->exceptionMessage})");
             }
         default:
-            $error = __('Er is een onbekende fout opgetreden: ', 'circulair-geld') . $response_code;
+            $error = __('An unknown error has occurred: %s', 'circulair-geld') . $response_code;
             break;
     }
     
