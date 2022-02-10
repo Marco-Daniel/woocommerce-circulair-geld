@@ -3,7 +3,7 @@ Contributors: marcodaniel
 Tags: circulair geld, payments, payment gateway, woocommerce
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 Tested up to: 5.9
 Requires PHP: 7.1
 
@@ -22,6 +22,9 @@ Integrate Circulair Currency in your WooCommerce webshop!
 > United Economy
 
 == Changelog ==
+
+= 1.0.6 = 
+* Fixed error with uploading of v1.0.5
 
 = 1.0.5 = 
 * Fixed bug when using username/pwd to authenticate with the cyclos api
