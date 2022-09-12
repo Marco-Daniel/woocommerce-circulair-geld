@@ -4,7 +4,7 @@
  * Plugin Name: Circulair Currency
  * Plugin URI: https://github.com/Marco-Daniel/circulair-geld
  * Description: A WordPress plugin that enables payments with Circulair Currency on WooCommerce webshops.
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: M.D. Leguijt | M.D. Design & Development
  * Author URI: https://mddd.nl
  * License: GPLv2 or later
