@@ -29,7 +29,7 @@ function wooce_payment_gateway_init() {
       $this->testmode = 'yes' === $this->get_option( 'testmode' );
       $this->use_accessclient = 'yes' === $this->get_option( 'use_accessclient' );
 
-      $this->cg_url = 'https://mijn.circuitnederland.nl';
+      $this->cg_url = 'https://mijn.unitedeconomy.nl';
       $this->root_url = $this->testmode ? 'https://demo.cyclos.org' : $this->cg_url;
       $this->api_endpoint = $this->root_url . '/api';
       $this->username = $this->testmode ? "ticket" : $this->get_option( 'username' );
